@@ -96,17 +96,6 @@ completionHandler:(void (^)(NSString * _Nullable result))completionHandler
             if(jsDialogBlock){
                 promptHandler=completionHandler;
             }
-//            UIAlertView *alert = [[UIAlertView alloc]
-//                                  initWithTitle:prompt
-//                                  message:@""
-//                                  delegate:self
-//                                  cancelButtonTitle:dialogTextDic[@"promptCancelBtn"]?dialogTextDic[@"promptCancelBtn"]:@"取消"
-//                                  otherButtonTitles:dialogTextDic[@"promptOkBtn"]?dialogTextDic[@"promptOkBtn"]:@"确定",
-//                                  nil];
-//            [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
-//            txtName = [alert textFieldAtIndex:0];
-//            txtName.text=defaultText;
-//            [alert show];
             UIAlertController *alertController = [UIAlertController alertControllerWithTitle:prompt message:@"" preferredStyle:UIAlertControllerStyleAlert];
             [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
                 txtName = textField;
@@ -163,13 +152,6 @@ completionHandler:(void (^)(void))completionHandler
         if(jsDialogBlock){
             alertHandler=completionHandler;
         }
-//        UIAlertView *alertView =
-//        [[UIAlertView alloc] initWithTitle:dialogTextDic[@"alertTitle"]?dialogTextDic[@"alertTitle"]:@"提示"
-//                                   message:message
-//                                  delegate:self
-//                         cancelButtonTitle:dialogTextDic[@"alertBtn"]?dialogTextDic[@"alertBtn"]:@"确定"
-//                         otherButtonTitles:nil,nil];
-//        [alertView show];
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:dialogTextDic[@"alertTitle"]?dialogTextDic[@"alertTitle"]:@"提示" message:message preferredStyle:UIAlertControllerStyleAlert];
        [alertController addAction:[UIAlertAction actionWithTitle:dialogTextDic[@"alertBtn"]?dialogTextDic[@"alertBtn"]:@"确定" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
            if(dialogType==1 && alertHandler){
@@ -198,13 +180,6 @@ initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(BOOL))completi
         if(jsDialogBlock){
             confirmHandler=completionHandler;
         }
-//        UIAlertView *alertView =
-//        [[UIAlertView alloc] initWithTitle:dialogTextDic[@"confirmTitle"]?dialogTextDic[@"confirmTitle"]:@"提示"
-//                                   message:message
-//                                  delegate:self
-//                         cancelButtonTitle:dialogTextDic[@"confirmCancelBtn"]?dialogTextDic[@"confirmCancelBtn"]:@"取消"
-//                         otherButtonTitles:dialogTextDic[@"confirmOkBtn"]?dialogTextDic[@"confirmOkBtn"]:@"确定", nil];
-//        [alertView show];
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:dialogTextDic[@"confirmTitle"]?dialogTextDic[@"confirmTitle"]:@"提示" message:message preferredStyle:UIAlertControllerStyleAlert];
         [alertController addAction:[UIAlertAction actionWithTitle:dialogTextDic[@"confirmCancelBtn"]?dialogTextDic[@"confirmCancelBtn"]:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
         }]];
@@ -261,25 +236,6 @@ initiatedByFrame:(WKFrameInfo *)frame completionHandler:(void (^)(BOOL))completi
         return [self.DSUIDelegate webView:webView commitPreviewingViewController:previewingViewController];
     }
 }
-
-//- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-//{
-//    if(dialogType==1 && alertHandler){
-//        alertHandler();
-//        alertHandler=nil;
-//    }else if(dialogType==2 && confirmHandler){
-//        confirmHandler(buttonIndex==1?YES:NO);
-//        confirmHandler=nil;
-//    }else if(dialogType==3 && promptHandler && txtName) {
-//        if(buttonIndex==1){
-//            promptHandler([txtName text]);
-//        }else{
-//            promptHandler(@"");
-//        }
-//        promptHandler=nil;
-//        txtName=nil;
-//    }
-//}
 
 - (void) evalJavascript:(int) delay{
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delay * NSEC_PER_MSEC)), dispatch_get_main_queue(), ^{
